@@ -1,0 +1,30 @@
+.sidebar-chat {
+  display: flex;
+  cursor: pointer;
+  border-bottom: 1px solid lightgray;
+  padding: 20px;
+}
+
+.sidebar-chat:hover, .sidebar-chat.sticky:hover  {
+  background-color: #ebebeb;
+}
+
+.sidebar-chat__info > h2 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.sidebar-chat__info > p {
+  color: #374151;
+}
+
+.sidebar-chat__info {
+  margin-left: 16px;
+}
+
+.sidebar-chat.sticky {
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
