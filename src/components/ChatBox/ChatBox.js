@@ -35,7 +35,28 @@ function ChatBox() {
           </IconButton>
         </div>
       </div>
-      <div className="chat-box__body"></div>
+      <div className="chat-box__body">
+        <p className="chat-box__body--message">
+          <span className="chat-box__body--name">Allyssa Albores</span>
+          Hey my name is Allyssa Albores!
+          <span className="chat-box__body--timestamp">3:52pm</span>
+        </p>
+        <p className="chat-box__body--message chat-box__receiver">
+          <span className="chat-box__body--name">James Alfon Salvacion</span>
+          Good Evening! Sample message...
+          <span className="chat-box__body--timestamp">3:52pm</span>
+        </p>
+        <p className="chat-box__body--message chat-box__receiver">
+          <span className="chat-box__body--name">James Alfon Salvacion</span>
+          Good Evening! Sample message...
+          <span className="chat-box__body--timestamp">3:52pm</span>
+        </p>
+        <p className="chat-box__body--message">
+          <span className="chat-box__body--name">Allyssa Albores</span>
+          Hey my name is Allyssa Albores!
+          <span className="chat-box__body--timestamp">3:52pm</span>
+        </p>
+      </div>
       <div className="chat-box__footer"></div>
     </section>
   );
