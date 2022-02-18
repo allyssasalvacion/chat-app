@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./RoomModal.css";
 
 import { styled } from "@mui/material/styles";
@@ -10,35 +10,38 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import db from "../../firebase";
+import { storage } from "../../firebase";
 
 function RoomModal({ visible, setVisible }) {
   const [image, setImage] = useState("");
-  const inputRef = useRef();
+  const [roomName, setRoomName] = useState("");
+  const [blob, setBlob] = useState("");
 
   const Input = styled("input")({
     display: "none",
   });
 
-  const handleUpload = (event) => {
-    console.log(event.target?.files?.[0]);
-    const newImage = event.target?.files?.[0];
-
-    if (newImage) {
-      setImage(URL.createObjectURL(newImage));
-    }
+  const handleUpload = (e) => {
+    const newImage = e.target.files[0];
+    setImage(newImage);
+    setBlob(URL.createObjectURL(newImage));
   };
 
   const handleClose = () => {
     setVisible(false);
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     setVisible(false);
 
-    if (inputRef.current.value && image) {
-      db.collection("rooms").add({
-        name: inputRef.current.value,
-        image: image,
+    if (roomName && image) {
+      await storage.ref(`${image.name}`).put(image);
+      const storageRef = storage.ref(`${image.name}`);
+      await storageRef.getDownloadURL().then((url) => {
+        db.collection("rooms").add({
+          name: roomName,
+          image: url,
+        });
       });
     }
   };
@@ -47,7 +50,7 @@ function RoomModal({ visible, setVisible }) {
     <Dialog open={visible} onClose={handleClose} fullWidth>
       <DialogTitle>Create a new room</DialogTitle>
       <DialogContent className="content">
-        <Avatar src={image} sx={{ width: 100, height: 100 }} />
+        <Avatar src={blob} sx={{ width: 100, height: 100 }} />
         <label htmlFor="contained-button-file">
           <Input
             accept="image"
@@ -61,10 +64,10 @@ function RoomModal({ visible, setVisible }) {
           </Button>
         </label>
         <TextField
-          inputRef={inputRef}
           id="outlined-name"
           label="Room Name"
           fullWidth
+          onChange={(e) => setRoomName(e.target.value)}
         />
       </DialogContent>
       <DialogActions className="actions">
