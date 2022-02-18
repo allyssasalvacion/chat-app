@@ -1,7 +1,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: 0.35;
+  flex: 0.30;
   border-right: 1px solid lightgray;
 }
 
@@ -12,12 +12,19 @@
   padding: 1.5em;
 }
 
-/* .sidebar__header--icons {
+.sidebar__header--avatar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
+}
+
+.sidebar__header--icons {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 10vw;
-} */
+  min-width: 5vw;
+}
 
 .sidebar__search {
   display: flex;

@@ -1,0 +1,21 @@
+.content{
+  display: grid;
+  place-items: center;
+}
+
+.content > .MuiFormControl-root {
+  margin-top: 2.5rem;
+}
+
+.content > .MuiAvatar-root {
+  margin-top: 0.25rem;
+  margin-bottom: 1.2rem;
+}
+
+.MuiDialogActions-root > .MuiButton-root, .upload {
+  text-transform: capitalize !important;
+}
+
+.MuiDialogActions-root > .MuiButton-root:not(:first-of-type) {
+  margin-left: 1.2rem;
+}

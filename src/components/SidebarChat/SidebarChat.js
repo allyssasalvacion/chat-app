@@ -5,8 +5,7 @@ import db from "../../firebase";
 
 import Avatar from "@mui/material/Avatar";
 
-function SidebarChat({ id, name, addNewChat }) {
-  const [seed, setSeed] = useState("");
+function SidebarChat({ id, name, image }) {
   const [messages, setMessages] = useState("");
 
   useEffect(() => {
@@ -21,34 +20,20 @@ function SidebarChat({ id, name, addNewChat }) {
     }
   }, [id]);
 
-  useEffect(() => {
-    setSeed(Math.floor(Math.random() * 5000));
-  }, []);
-
-  const createChat = () => {
-    const roomName = prompt("Please enter name for chat room");
-
-    if (roomName) {
-      db.collection("rooms").add({
-        name: roomName,
-      });
-    }
-  };
-
-  return !addNewChat ? (
+  return (
     <Link to={`/rooms/${id}`}>
       <div className="sidebar-chat">
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+        <Avatar src={image} />
         <dl className="sidebar-chat__info">
           <h2>{name}</h2>
-          <p>{messages[0]?.message ? messages[0]?.message : "No messages"}</p>
+          <p>
+            {messages[0]?.message
+              ? `${messages[0]?.name}: ${messages[0]?.message}`
+              : "No messages"}
+          </p>
         </dl>
       </div>
     </Link>
-  ) : (
-    <div onClick={createChat} className="sidebar-chat sticky">
-      <p>Add new chat..</p>
-    </div>
   );
 }
 

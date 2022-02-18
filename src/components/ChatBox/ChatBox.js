@@ -12,13 +12,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MicIcon from "@mui/icons-material/Mic";
 import db from "../../firebase";
-import { useStateValue } from "../../StateProvider";
 
 function ChatBox() {
   const [input, setInput] = useState("");
-  const [seed, setSeed] = useState("");
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
+  const [image, setImage] = useState("");
   const [messages, setMessages] = useState([]);
   const displayName = localStorage.getItem("displayName");
   const uid = localStorage.getItem("uid");
@@ -31,16 +30,16 @@ function ChatBox() {
 
       db.collection("rooms")
         .doc(roomId)
+        .onSnapshot((snapshot) => setImage(snapshot.data().image));
+
+      db.collection("rooms")
+        .doc(roomId)
         .collection("messages")
         .orderBy("timestamp", "asc")
         .onSnapshot((snapshot) =>
           setMessages(snapshot.docs.map((doc) => doc.data()))
         );
     }
-  }, [roomId]);
-
-  useEffect(() => {
-    setSeed(Math.floor(Math.random * 5000));
   }, [roomId]);
 
   const sendMessage = (e) => {
@@ -62,7 +61,7 @@ function ChatBox() {
   return (
     <section className="chat-box">
       <div className="chat-box__header">
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+        <Avatar src={image} />
         <div className="chat-box__info">
           <h3>{roomName}</h3>
           <p>

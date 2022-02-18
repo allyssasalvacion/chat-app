@@ -3,20 +3,21 @@ import "./Sidebar.css";
 import db from "../../firebase";
 
 import SidebarChat from "../SidebarChat/SidebarChat";
+import RoomModal from "../RoomModal/RoomModal";
 
 // components
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 
 // icons
-import DonutLargeIcon from "@mui/icons-material/DonutLarge";
-import ChatIcon from "@mui/icons-material/Chat";
+import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
   const [logout, setLogout] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) =>
@@ -32,6 +33,10 @@ function Sidebar() {
       unsubscribe();
     };
   }, []);
+
+  const createRoom = () => {
+    setVisible(true);
+  };
 
   const exitApp = () => {
     localStorage.removeItem("uid");
@@ -49,12 +54,18 @@ function Sidebar() {
   return (
     <section className="sidebar">
       <div className="sidebar__header">
-        <Avatar
-          alt={displayName}
-          src={photoUrl}
-          sx={{ width: 48, height: 48 }}
-        />
+        <div className="sidebar__header--avatar">
+          <Avatar
+            alt={displayName}
+            src={photoUrl}
+            sx={{ width: 48, height: 48 }}
+          />
+          <h2>{displayName}</h2>
+        </div>
         <div className="sidebar__header--icons">
+          <IconButton aria-label="forum" onClick={createRoom}>
+            <ForumOutlinedIcon />
+          </IconButton>
           <IconButton aria-label="more vert" onClick={exitApp}>
             <ExitToAppIcon />
           </IconButton>
@@ -67,11 +78,20 @@ function Sidebar() {
         </div>
       </div>
       <div className="sidebar__chats">
-        <SidebarChat addNewChat />
         {rooms.map((room) => (
-          <SidebarChat key={room.id} id={room.id} name={room.data.name} />
+          <SidebarChat
+            key={room.id}
+            id={room.id}
+            name={room.data.name}
+            image={room.data.image}
+          />
         ))}
       </div>
+      {visible ? (
+        <RoomModal visible={visible} setVisible={setVisible} />
+      ) : (
+        <></>
+      )}
     </section>
   );
 }
