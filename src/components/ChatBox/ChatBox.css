@@ -43,38 +43,52 @@
 
 .chat-box__body--message {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+}
+
+.chat-box__body--receiver {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chat-box__body--message > p {
   font-size: 16px;
   padding: 12px;
   border-radius: 8px;
   width: fit-content;
+  max-width: 60%;
   background-color: lightblue;
-  margin-top: 24px;
-  margin-bottom: 4.5rem;
+  margin: 8px 0;
 }
 
-.chat-box__receiver {
+.chat-box__receiver > p {
   margin-left: auto;
   background-color: lightgray;
 }
 
+.chat-box__body--message > span {
+  text-align: left;
+}
+
 .chat-box__receiver > span {
-  right: 0;
   text-align: right;
 }
 
 .chat-box__body--name {
-  position: absolute;
-  top: -28px;
-  left: 4px;
   font-weight: 700;
+  text-align: right;
+
 }
 
 .chat-box__body--timestamp {
-  position: absolute;
-  bottom: -24px;
-  left: 4px;
   color: gray;
   font-size: 12px;
+  text-align: right;
+
 }
 
 .chat-box__footer {

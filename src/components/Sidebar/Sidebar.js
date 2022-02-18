@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import db from "../../firebase";
+import { useStateValue } from "../../StateProvider";
 
 import SidebarChat from "../SidebarChat/SidebarChat";
 
@@ -16,9 +17,10 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
-    db.collection("rooms").onSnapshot((snapshot) =>
+    const unsubscribe = db.collection("rooms").onSnapshot((snapshot) =>
       setRooms(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -26,14 +28,18 @@ function Sidebar() {
         }))
       )
     );
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
     <section className="sidebar">
       <div className="sidebar__header">
         <Avatar
-          alt="Allyssa Albores"
-          src="/images/1.png"
+          alt={user?.displayName}
+          src={user?.photoURL}
           sx={{ width: 48, height: 48 }}
         />
         <div className="sidebar__header--icons">
