@@ -12,12 +12,12 @@
   padding: 1.5em;
 }
 
-.sidebar__header--icons {
+/* .sidebar__header--icons {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-width: 10vw;
-}
+} */
 
 .sidebar__search {
   display: flex;

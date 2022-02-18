@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import db from "../../firebase";
-import { useStateValue } from "../../StateProvider";
 
 import SidebarChat from "../SidebarChat/SidebarChat";
 
@@ -12,12 +11,12 @@ import IconButton from "@mui/material/IconButton";
 // icons
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import ChatIcon from "@mui/icons-material/Chat";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 function Sidebar() {
   const [rooms, setRooms] = useState([]);
-  const [{ user }, dispatch] = useStateValue();
+  const [logout, setLogout] = useState(false);
 
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) =>
@@ -34,25 +33,30 @@ function Sidebar() {
     };
   }, []);
 
+  const exitApp = () => {
+    localStorage.removeItem("uid");
+    window.location.reload();
+    setLogout(true);
+  };
+
+  const photoUrl =
+    localStorage.getItem("photoURL") !== ""
+      ? localStorage.getItem("photoURL")
+      : null;
+
+  const displayName = localStorage.getItem("displayName");
+
   return (
     <section className="sidebar">
       <div className="sidebar__header">
         <Avatar
-          alt={user?.displayName}
-          src={user?.photoURL}
+          alt={displayName}
+          src={photoUrl}
           sx={{ width: 48, height: 48 }}
         />
         <div className="sidebar__header--icons">
-          <IconButton aria-label="donut large">
-            <DonutLargeIcon />
-          </IconButton>
-
-          <IconButton aria-label="chat">
-            <ChatIcon />
-          </IconButton>
-
-          <IconButton aria-label="more vert">
-            <MoreVertIcon />
+          <IconButton aria-label="more vert" onClick={exitApp}>
+            <ExitToAppIcon />
           </IconButton>
         </div>
       </div>

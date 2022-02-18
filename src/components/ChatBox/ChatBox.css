@@ -81,7 +81,17 @@
 .chat-box__body--name {
   font-weight: 700;
   text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
+.chat-box__body--message .chat-box__body--name {
+  justify-content: flex-start;
+}
+
+.chat-box__receiver .chat-box__body--name {
+  justify-content: flex-end;
 }
 
 .chat-box__body--timestamp {

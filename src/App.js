@@ -9,10 +9,14 @@ import ChatBox from "./components/ChatBox/ChatBox";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
+  const uid =
+    localStorage.getItem("uid") !== undefined
+      ? localStorage.getItem("uid")
+      : null;
 
   return (
     <div className="app">
-      {!user ? (
+      {!user && !uid ? (
         <Login />
       ) : (
         <div className="app__body">

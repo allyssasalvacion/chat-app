@@ -20,7 +20,8 @@ function ChatBox() {
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
-  const [{ user }, dispatch] = useStateValue();
+  const displayName = localStorage.getItem("displayName");
+  const uid = localStorage.getItem("uid");
 
   useEffect(() => {
     if (roomId) {
@@ -45,12 +46,16 @@ function ChatBox() {
   const sendMessage = (e) => {
     e.preventDefault();
 
-    db.collection("rooms").doc(roomId).collection("messages").add({
-      message: input,
-      name: user.displayName,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      userId: user.uid,
-    });
+    db.collection("rooms")
+      .doc(roomId)
+      .collection("messages")
+      .add({
+        message: input,
+        name: displayName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        photoURL: localStorage.getItem("photoURL"),
+        userId: uid,
+      });
     setInput("");
   };
 
@@ -83,11 +88,14 @@ function ChatBox() {
         {messages.map((message) => (
           <div
             className={`chat-box__body--message ${
-              message.userId === user.uid && "chat-box__receiver"
+              message.userId === uid && "chat-box__receiver"
             }`}
             key={message.timestamp}
           >
-            <span className="chat-box__body--name">{message.name}</span>
+            <span className="chat-box__body--name">
+              <Avatar src={message.photoURL} sx={{ width: 24, height: 24 }} />
+              {message.name}
+            </span>
             <p> {message.message}</p>
             <span className="chat-box__body--timestamp">
               {new Date(message.timestamp?.toDate()).toUTCString()}
