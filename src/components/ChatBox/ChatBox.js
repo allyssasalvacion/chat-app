@@ -19,6 +19,7 @@ function ChatBox() {
   const [roomName, setRoomName] = useState("");
   const [image, setImage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [sortedMessages, setSortedMessages] = useState([]);
   const displayName = localStorage.getItem("displayName");
   const uid = localStorage.getItem("uid");
 
@@ -58,6 +59,23 @@ function ChatBox() {
     setInput("");
   };
 
+  const groupMessages = () => {
+    let groupedMessages = {};
+    for (let message of messages) {
+      let date = String(
+        new Date(message.timestamp?.toDate()).toUTCString()
+      ).slice(5, 16);
+      if (date in groupedMessages) {
+        groupedMessages[date].push(message);
+      } else {
+        groupedMessages[date] = [];
+        groupedMessages[date].push(message);
+      }
+    }
+    console.log(groupedMessages);
+    setSortedMessages(groupedMessages);
+  };
+
   return (
     <section className="chat-box">
       <div className="chat-box__header">
@@ -66,9 +84,11 @@ function ChatBox() {
           <h3>{roomName}</h3>
           <p>
             Last seen at{" "}
-            {new Date(
-              messages[messages.length - 1]?.timestamp?.toDate()
-            ).toUTCString()}
+            {messages.length
+              ? new Date(
+                  messages[messages.length - 1]?.timestamp?.toDate()
+                ).toLocaleString("en-US", { timeZone: "Asia/Manila" })
+              : "..."}
           </p>
         </div>
         <div className="chat-box__icons">
