@@ -35,7 +35,7 @@ function ChatBox() {
       db.collection("rooms")
         .doc(roomId)
         .collection("messages")
-        .orderBy("timestamp", "asc")
+        .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) =>
           setMessages(snapshot.docs.map((doc) => doc.data()))
         );
@@ -88,9 +88,9 @@ function ChatBox() {
         {messages.map((message, i, array) => (
           <div key={message.timestamp}>
             <div className="chat-box__body--date">
-              {i === 0 ? (
+              {i === array.length - 1 ? (
                 <p>{getDate(array[i].timestamp)}</p>
-              ) : getDate(array[i - 1].timestamp) !==
+              ) : getDate(array[i + 1].timestamp) !==
                 getDate(array[i].timestamp) ? (
                 <p>{getDate(array[i].timestamp)}</p>
               ) : (

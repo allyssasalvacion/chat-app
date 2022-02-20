@@ -24,14 +24,14 @@ function SidebarChat({ id, name, image }) {
     <Link to={`/rooms/${id}`}>
       <div className="sidebar-chat">
         <Avatar src={image} />
-        <dl className="sidebar-chat__info">
+        <div className="sidebar-chat__info">
           <h2>{name}</h2>
           <p>
             {messages[0]?.message
               ? `${messages[0]?.name}: ${messages[0]?.message}`
               : "No messages"}
           </p>
-        </dl>
+        </div>
       </div>
     </Link>
   );

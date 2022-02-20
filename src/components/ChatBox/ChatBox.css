@@ -38,24 +38,24 @@
   background-repeat: repeat;
   background-position: center; */
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   overflow: auto;
   padding: 32px;
 }
 
-.chat-box__wrapper::-webkit-scrollbar {
+.chat-box__body::-webkit-scrollbar {
   width: 4px;
 }
 
-.chat-box__wrapper::-webkit-scrollbar-track {
+.chat-box__body::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
 
-.chat-box__wrapper::-webkit-scrollbar-thumb {
+.chat-box__body::-webkit-scrollbar-thumb {
   background: #888;
 }
 
-.chat-box__wrapper::-webkit-scrollbar-thumb:hover {
+.chat-box__body::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
