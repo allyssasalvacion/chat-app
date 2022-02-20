@@ -37,8 +37,26 @@
   /* background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
   background-repeat: repeat;
   background-position: center; */
-  padding: 32px;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
+  padding: 32px;
+}
+
+.chat-box__wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-box__wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-box__wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.chat-box__wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .chat-box__body--message {
@@ -131,4 +149,20 @@
 .chat-box__footer > .MuiSvgIcon-root {
   color: gray;
   padding: 12px;
+}
+
+.chat-box__body--date {
+  display: flex;
+  justify-content: center;
+}
+
+.chat-box__body--date > p{
+  text-align: center;
+  width: fit-content;
+  font-size: 12px;
+  padding: 8px;
+  font-weight: 600;
+  border-radius: 6px;
+  margin-bottom: .75rem;
+  text-transform: uppercase;
 }
