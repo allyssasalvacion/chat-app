@@ -18,6 +18,14 @@ function Sidebar() {
   const [rooms, setRooms] = useState([]);
   const [logout, setLogout] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [input, setInput] = useState("");
+  const [searchToggle, setSearchToggle] = useState(false);
+  const [search, setSearch] = useState([]);
+
+  const matcher = (search, values) => {
+    const reg = RegExp(`.*${search.toLowerCase().split("").join(".*")}.*`);
+    return values.filter((v) => v.data.name.toLowerCase().match(reg));
+  };
 
   useEffect(() => {
     const unsubscribe = db.collection("rooms").onSnapshot((snapshot) =>
@@ -33,6 +41,21 @@ function Sidebar() {
       unsubscribe();
     };
   }, []);
+
+  const handleChange = (e) => {
+    setSearchToggle(false);
+    setInput(e.target.value);
+  };
+
+  useEffect(() => {
+    if (rooms.length) {
+      setSearch(matcher(input, rooms));
+    }
+
+    if (!input) {
+      setSearchToggle(true);
+    }
+  }, [input, rooms]);
 
   const createRoom = () => {
     setVisible(true);
@@ -73,18 +96,32 @@ function Sidebar() {
       <div className="sidebar__search">
         <div className="sidebar__search--container">
           <SearchOutlinedIcon />
-          <input placeholder="Search room" type="text" />
+          <input
+            value={input}
+            placeholder="Search room"
+            type="text"
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div className="sidebar__chats">
-        {rooms.map((room) => (
-          <SidebarChat
-            key={room.id}
-            id={room.id}
-            name={room.data.name}
-            image={room.data.image}
-          />
-        ))}
+        {searchToggle
+          ? rooms.map((room) => (
+              <SidebarChat
+                key={room.id}
+                id={room.id}
+                name={room.data.name}
+                image={room.data.image}
+              />
+            ))
+          : search.map((room) => (
+              <SidebarChat
+                key={room.id}
+                id={room.id}
+                name={room.data.name}
+                image={room.data.image}
+              />
+            ))}
       </div>
       {visible ? (
         <RoomModal visible={visible} setVisible={setVisible} />
