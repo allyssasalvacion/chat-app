@@ -86,19 +86,6 @@ function ChatBox() {
         <div className="chat-box__info">
           <h3>{roomName}</h3>
         </div>
-        <div className="chat-box__icons">
-          <label htmlFor="contained-button-file">
-            <Input
-              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-              id="contained-button-file"
-              type="file"
-              onChange={handleUpload}
-            />
-            <IconButton variant="contained" component="span" className="upload">
-              <AttachFileIcon />
-            </IconButton>
-          </label>
-        </div>
       </div>
       <div className="chat-box__body">
         {messages.map((message, i, array) => (
@@ -148,9 +135,6 @@ function ChatBox() {
             Send
           </button>
         </form>
-        <IconButton>
-          <MicIcon />
-        </IconButton>
       </div>
     </section>
   );
