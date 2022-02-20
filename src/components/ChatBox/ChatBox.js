@@ -3,15 +3,10 @@ import firebase from "firebase/compat/app";
 import { useParams } from "react-router-dom";
 import "./ChatBox.css";
 
-import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-import MicIcon from "@mui/icons-material/Mic";
 import db from "../../firebase";
 
 function ChatBox() {
@@ -21,12 +16,7 @@ function ChatBox() {
   const [image, setImage] = useState("");
   const [messages, setMessages] = useState([]);
   const displayName = localStorage.getItem("displayName");
-  const [file, setFile] = useState("");
   const uid = localStorage.getItem("uid");
-
-  const Input = styled("input")({
-    display: "none",
-  });
 
   useEffect(() => {
     if (roomId) {
@@ -71,12 +61,6 @@ function ChatBox() {
       month: "short",
       day: "numeric",
     });
-  };
-
-  const handleUpload = (e) => {
-    const newFile = e.target.files[0];
-    setFile(newFile);
-    console.log(newFile);
   };
 
   return (
