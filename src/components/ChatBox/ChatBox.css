@@ -28,8 +28,6 @@
 
 .chat-box__icons {
   display: flex;
-  justify-content: space-between;
-  min-width: 100px;
 }
 
 .chat-box__body {

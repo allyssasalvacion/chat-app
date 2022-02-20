@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import { useParams } from "react-router-dom";
 import "./ChatBox.css";
 
+import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 
@@ -20,7 +21,12 @@ function ChatBox() {
   const [image, setImage] = useState("");
   const [messages, setMessages] = useState([]);
   const displayName = localStorage.getItem("displayName");
+  const [file, setFile] = useState("");
   const uid = localStorage.getItem("uid");
+
+  const Input = styled("input")({
+    display: "none",
+  });
 
   useEffect(() => {
     if (roomId) {
@@ -45,16 +51,18 @@ function ChatBox() {
   const sendMessage = (e) => {
     e.preventDefault();
 
-    db.collection("rooms")
-      .doc(roomId)
-      .collection("messages")
-      .add({
-        message: input,
-        name: displayName,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        photoURL: localStorage.getItem("photoURL"),
-        userId: uid,
-      });
+    if (input) {
+      db.collection("rooms")
+        .doc(roomId)
+        .collection("messages")
+        .add({
+          message: input,
+          name: displayName,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          photoURL: localStorage.getItem("photoURL"),
+          userId: uid,
+        });
+    }
     setInput("");
   };
 
@@ -65,6 +73,12 @@ function ChatBox() {
     });
   };
 
+  const handleUpload = (e) => {
+    const newFile = e.target.files[0];
+    setFile(newFile);
+    console.log(newFile);
+  };
+
   return (
     <section className="chat-box">
       <div className="chat-box__header">
@@ -73,15 +87,17 @@ function ChatBox() {
           <h3>{roomName}</h3>
         </div>
         <div className="chat-box__icons">
-          <IconButton>
-            <SearchOutlinedIcon />
-          </IconButton>
-          <IconButton>
-            <AttachFileIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
+          <label htmlFor="contained-button-file">
+            <Input
+              accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+              id="contained-button-file"
+              type="file"
+              onChange={handleUpload}
+            />
+            <IconButton variant="contained" component="span" className="upload">
+              <AttachFileIcon />
+            </IconButton>
+          </label>
         </div>
       </div>
       <div className="chat-box__body">

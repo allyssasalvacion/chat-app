@@ -60,7 +60,6 @@ function Sidebar() {
             src={photoUrl}
             sx={{ width: 48, height: 48 }}
           />
-          <h2>{displayName}</h2>
         </div>
         <div className="sidebar__header--icons">
           <IconButton aria-label="forum" onClick={createRoom}>
@@ -74,7 +73,7 @@ function Sidebar() {
       <div className="sidebar__search">
         <div className="sidebar__search--container">
           <SearchOutlinedIcon />
-          <input placeholder="Search or start new chat" type="text" />
+          <input placeholder="Search room" type="text" />
         </div>
       </div>
       <div className="sidebar__chats">

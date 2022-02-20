@@ -53,9 +53,8 @@ function RoomModal({ visible, setVisible }) {
         <Avatar src={blob} sx={{ width: 100, height: 100 }} />
         <label htmlFor="contained-button-file">
           <Input
-            accept="image"
+            accept="image/*"
             id="contained-button-file"
-            multiple
             type="file"
             onChange={handleUpload}
           />
