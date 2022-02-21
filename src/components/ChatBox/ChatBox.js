@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import { useParams } from "react-router-dom";
 import "./ChatBox.css";
+import Picker from "emoji-picker-react";
 
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -17,6 +18,7 @@ function ChatBox() {
   const [messages, setMessages] = useState([]);
   const displayName = localStorage.getItem("displayName");
   const uid = localStorage.getItem("uid");
+  const [showPicker, setShowPicker] = useState(false);
 
   useEffect(() => {
     if (roomId) {
@@ -54,6 +56,11 @@ function ChatBox() {
         });
     }
     setInput("");
+  };
+
+  const onEmojiClick = (event, emojiObject) => {
+    setInput((prevInput) => prevInput + emojiObject.emoji);
+    setShowPicker(false);
   };
 
   const getDate = (timestamp) => {
@@ -105,9 +112,10 @@ function ChatBox() {
         ))}
       </div>
       <div className="chat-box__footer">
-        <IconButton>
+        <IconButton onClick={() => setShowPicker((emoji) => !emoji)}>
           <InsertEmoticonIcon />
         </IconButton>
+        {showPicker && <Picker onEmojiClick={onEmojiClick} />}
         <form>
           <input
             value={input}
