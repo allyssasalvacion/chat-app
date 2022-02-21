@@ -30,13 +30,7 @@ function Login() {
   return (
     <section className="login">
       <div className="login__container">
-        <img
-          src="https://seeklogo.com/images/W/whatsapp-logo-8AE44BBBB0-seeklogo.com.png"
-          alt="logo"
-        />
-        <div className="login__container--text">
-          <h1>Whatsapp</h1>
-        </div>
+        <div className="login__container--text"></div>
         <Button onClick={signIn}>Sign In With Google</Button>
       </div>
     </section>
