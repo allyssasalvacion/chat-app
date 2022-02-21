@@ -81,8 +81,9 @@ function Sidebar() {
           <Avatar
             alt={displayName}
             src={photoUrl}
-            sx={{ width: 48, height: 48 }}
+            sx={{ width: 36, height: 36 }}
           />
+          <h3>{displayName}</h3>
         </div>
         <div className="sidebar__header--icons">
           <IconButton aria-label="forum" onClick={createRoom}>

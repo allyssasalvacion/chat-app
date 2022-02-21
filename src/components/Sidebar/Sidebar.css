@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5em;
+  padding: 1.25rem;
 }
 
 .sidebar__header--avatar {
@@ -31,7 +31,7 @@
   align-items: center;
   background-color: #f6f7f9;
   height: 36px;
-  padding: 12px;
+  padding: 0 12px 12px 12px;
 }
 
 .sidebar__search--container {
