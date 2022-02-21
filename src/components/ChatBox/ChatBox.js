@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import { useParams } from "react-router-dom";
 import "./ChatBox.css";
 import Picker from "emoji-picker-react";
+import OutsideClickHandler from "react-outside-click-handler";
 
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
@@ -102,10 +103,12 @@ function ChatBox() {
               </span>
               <p> {message.message}</p>
               <span className="chat-box__body--timestamp">
-                {new Date(message.timestamp?.toDate()).toLocaleString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {message.timestamp
+                  ? new Date(message.timestamp?.toDate()).toLocaleString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  : "\xa0"}
               </span>
             </div>
           </div>
@@ -115,7 +118,13 @@ function ChatBox() {
         <IconButton onClick={() => setShowPicker((emoji) => !emoji)}>
           <InsertEmoticonIcon />
         </IconButton>
-        {showPicker && <Picker onEmojiClick={onEmojiClick} />}
+        <OutsideClickHandler
+          onOutsideClick={() => {
+            setShowPicker(false);
+          }}
+        >
+          {showPicker && <Picker onEmojiClick={onEmojiClick} />}
+        </OutsideClickHandler>
         <form>
           <input
             value={input}
