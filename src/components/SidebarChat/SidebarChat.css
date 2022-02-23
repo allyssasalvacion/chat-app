@@ -39,3 +39,7 @@ a {
   top: 0;
   z-index: 99;
 }
+
+.active .sidebar-chat {
+  background: rgb(126,86,217, 0.1);
+}

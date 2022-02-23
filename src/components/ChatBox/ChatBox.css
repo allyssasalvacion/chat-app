@@ -71,13 +71,15 @@
   border-radius: 8px;
   width: fit-content;
   max-width: 60%;
-  background-color: lightblue;
+  background-color: #eaecf5;
+  color: #000;
   margin: 8px 0;
 }
 
 .chat-box__receiver > p {
   margin-left: auto;
-  background-color: lightgray;
+  background-color: #7e56d9;
+  color: #fff;
 }
 
 .chat-box__body--message > span {

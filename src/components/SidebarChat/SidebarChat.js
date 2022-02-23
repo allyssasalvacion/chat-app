@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./SidebarChat.css";
 import db from "../../firebase";
 
@@ -21,7 +21,10 @@ function SidebarChat({ id, name, image }) {
   }, [id]);
 
   return (
-    <Link to={`/rooms/${id}`}>
+    <NavLink
+      to={`/rooms/${id}`}
+      className={(navData) => (navData.isActive ? "active" : "")}
+    >
       <div className="sidebar-chat">
         <Avatar src={image} />
         <div className="sidebar-chat__info">
@@ -33,7 +36,7 @@ function SidebarChat({ id, name, image }) {
           </p>
         </div>
       </div>
-    </Link>
+    </NavLink>
   );
 }
 

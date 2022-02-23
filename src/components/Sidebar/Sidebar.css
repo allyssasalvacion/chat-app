@@ -3,6 +3,7 @@
   flex-direction: column;
   flex: 0.30;
   border-right: 1px solid lightgray;
+  background: #fff;
 }
 
 .sidebar__header {
@@ -29,9 +30,10 @@
 .sidebar__search {
   display: flex;
   align-items: center;
-  background-color: #f6f7f9;
+  background-color: #fff;
   height: 36px;
   padding: 0 12px 12px 12px;
+  border-bottom: 1px solid lightgray;
 }
 
 .sidebar__search--container {
@@ -40,8 +42,10 @@
   background-color: #fff;
   width: 100%;
   height: 32px;
-  border-radius: 2em;
-  padding: .3em 0.9em;
+  border-radius: 2rem;
+  padding: .3rem 0.9rem;
+  margin-bottom: .5rem;
+  border: 1px solid lightgray;
 }
 
 .sidebar__search--container > .MuiSvgIcon-root {
