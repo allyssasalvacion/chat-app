@@ -70,8 +70,10 @@ function RoomModal({ visible, setVisible }) {
         />
       </DialogContent>
       <DialogActions className="actions">
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleCreate} variant="contained">
+        <Button onClick={handleClose} className="cancel">
+          Cancel
+        </Button>
+        <Button onClick={handleCreate} variant="contained" className="create">
           Create
         </Button>
       </DialogActions>

@@ -10,4 +10,22 @@
   background-color: #f8f8f8;
   height: 100vh;
   width: 100vw;
+  min-width: 1000px;
+  overflow-x: auto;
+}
+
+.app__body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.app__body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.app__body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.app__body::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

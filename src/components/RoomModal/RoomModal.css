@@ -16,6 +16,19 @@
   text-transform: capitalize !important;
 }
 
+.MuiButton-root.upload, .MuiButton-root.create {
+  background: #7e56d9;
+}
+
+.MuiButton-root.upload:hover, .MuiButton-root.create:hover {
+  background: #7e56d9;
+  opacity: 0.9;
+}
+
+.MuiButton-root.cancel {
+  color: #7e56d9;
+}
+
 .MuiDialogActions-root > .MuiButton-root:not(:first-of-type) {
   margin-left: 1.2rem;
 }
