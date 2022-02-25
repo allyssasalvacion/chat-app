@@ -17,16 +17,16 @@
 }
 
 .MuiButton-root.upload, .MuiButton-root.create {
-  background: #7e56d9;
+  background: #582be8;
 }
 
 .MuiButton-root.upload:hover, .MuiButton-root.create:hover {
-  background: #7e56d9;
+  background: #582be8;
   opacity: 0.9;
 }
 
 .MuiButton-root.cancel {
-  color: #7e56d9;
+  color: #582be8;
 }
 
 .MuiDialogActions-root > .MuiButton-root:not(:first-of-type) {
