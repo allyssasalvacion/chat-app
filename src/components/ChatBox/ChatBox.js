@@ -68,6 +68,7 @@ function ChatBox() {
     return timestamp?.toDate().toLocaleString([], {
       month: "short",
       day: "numeric",
+      year: "numeric",
     });
   };
 
